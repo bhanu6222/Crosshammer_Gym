@@ -1233,6 +1233,1109 @@ nav{display:flex;align-items:center;justify-content:space-between;height:78px}
 .card h3{font-size:19px;text-transform:uppercase;margin-bottom:10px}
 .card p{color:var(--muted);font-size:14px}
 
+/* THE CROSS HAMMER EDGE — big feature + supporting, hover to expand */
+.edge-grid{display:grid;grid-template-columns:1.3fr 1fr;grid-auto-rows:1fr;gap:24px}
+.edge-feature{grid-row:span 2}
+.edge{position:relative;overflow:hidden;border-radius:20px;
+  background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);box-shadow:var(--float);
+  padding:30px 30px 28px;display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:200px;cursor:default;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease, background .35s ease}
+.edge::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;
+  background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.edge-feature{justify-content:flex-start;min-height:430px}
+/* soft red glow accent on the feature card */
+.edge-feature::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 90% at 85% 0%,rgba(237,28,36,.16),transparent 55%)}
+.edge>*{position:relative;z-index:1}
+.edge-ic{width:54px;height:54px;border:2px solid var(--red);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;
+  background:var(--panel);box-shadow:var(--float);flex:none;transition:transform .35s ease}
+.edge h3{font-size:20px;text-transform:uppercase;letter-spacing:-.3px;line-height:1.15;margin-bottom:8px}
+.edge-feature h3{font-size:28px}
+.edge-teaser{color:var(--steel-light);font-size:14px;margin:0}
+/* hidden detail — collapsed by default, revealed on hover/focus */
+.edge-more{max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .45s cubic-bezier(.22,.61,.36,1), opacity .35s ease, margin-top .35s ease;margin-top:0}
+.edge-more p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.edge-points{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.edge-points li{font-size:12px;font-weight:600;letter-spacing:.3px;color:var(--steel-light);
+  border:1px solid var(--glass-line);border-radius:50px;padding:6px 13px;background:rgba(255,255,255,.03)}
+/* expand interaction */
+.edge:hover,.edge:focus-within{transform:translateY(-6px);border-color:var(--glass-line-hi);box-shadow:var(--float-hi);background:var(--glass-2)}
+.edge:hover::before,.edge:focus-within::before{transform:scaleX(1)}
+.edge:hover .edge-ic,.edge:focus-within .edge-ic{transform:scale(1.06) rotate(-3deg)}
+.edge:hover .edge-more,.edge:focus-within .edge-more{max-height:300px;opacity:1;margin-top:16px}
+.edge:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+
+@media(max-width:860px){
+  .edge-grid{grid-template-columns:1fr}
+  .edge-feature{grid-row:auto;min-height:auto}
+  .edge-feature h3{font-size:24px}
+  /* on touch screens, show the detail by default (no hover) */
+  .edge-more{max-height:none;opacity:1;margin-top:16px}
+}
+
+/* SERVICES */
+.services{background:transparent}
+/* SERVICES — hover to pop, others fade back */
+.svc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;max-width:1180px;margin:0 auto}
+.svc{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);border-radius:18px;padding:0;cursor:pointer;box-shadow:var(--float);overflow:hidden;
+  position:relative;transition:transform .35s cubic-bezier(.22,1,.36,1), opacity .35s ease, box-shadow .35s ease, border-color .25s ease}
+.svc .svc-img{height:120px;background-size:cover;background-position:center;position:relative}
+.svc .svc-img::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(18,18,20,.9))}
+.svc .svc-body{padding:18px 20px 22px}
+.svc .n{font-size:13px;color:var(--red);font-weight:800;letter-spacing:2px}
+.svc h4{font-size:17px;text-transform:uppercase;margin:10px 0 8px;line-height:1.15}
+.svc p{color:var(--muted);font-size:13.5px;line-height:1.5}
+/* when the row is hovered, fade every card back... */
+.svc-grid:hover .svc{opacity:.45;transform:scale(.97);filter:saturate(.7)}
+/* ...except the one under the cursor, which pops forward */
+.svc-grid .svc:hover{opacity:1;transform:scale(1.09);filter:none;z-index:5;
+  border-color:var(--red);box-shadow:var(--float-hi)}
+@media(max-width:900px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.svc-grid{grid-template-columns:repeat(2,1fr)}.svc-grid:hover .svc{opacity:1;transform:none;filter:none}}
+
+/* TRANSFORMATIONS */
+.trans{background:transparent}
+.trans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tcard{border-radius:18px;overflow:hidden;position:relative;aspect-ratio:3/3.4;
+  display:flex;align-items:flex-end;border:1px solid var(--glass-line);box-shadow:var(--float);transition:.25s}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--float-hi)}
+.tcard .ba{position:absolute;inset:0;display:flex}
+.tcard .ba div{flex:1;display:flex;align-items:flex-start;justify-content:flex-start;padding:10px 12px;font-weight:800;letter-spacing:2px;font-size:11px;color:rgba(255,255,255,.95);text-shadow:0 1px 6px rgba(0,0,0,.9);background-size:cover;background-position:center}
+.tcard .before{background:linear-gradient(135deg,#2a2a2e,#3a3a40)}
+.tcard .after{background:linear-gradient(135deg,var(--red-dark),var(--red))}
+.tcard .label{position:relative;width:100%;padding:18px;background:linear-gradient(transparent,rgba(0,0,0,.85));z-index:2;color:#fff}
+.tcard .label b{font-size:16px;text-transform:uppercase;color:#fff}
+.tcard .label span{display:block;color:rgba(255,255,255,.8);font-size:12px;margin-top:3px}
+.tcard .vtag{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);
+  padding:5px 12px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:1px;z-index:2}
+
+/* SOCIAL FEED */
+.social{background:transparent}
+.feed{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.post{aspect-ratio:1;border-radius:16px;border:1px solid var(--glass-line);position:relative;overflow:hidden;
+  background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:var(--float);display:flex;align-items:center;justify-content:center;transition:.25s}
+.post:hover{transform:translateY(-5px);box-shadow:var(--float-hi)}
+.post .ph{display:none}
+.post .pl{position:absolute;bottom:8px;left:8px;font-size:10px;letter-spacing:1px;color:#fff;font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.9);z-index:2}
+.post{background-size:cover;background-position:center}
+.post::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.7));z-index:1}
+.auto-tag{display:inline-flex;align-items:center;gap:8px;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);box-shadow:var(--float);
+  padding:7px 16px;border-radius:30px;font-size:12px;color:var(--steel-light);margin-top:18px}
+.auto-tag .dot{width:8px;height:8px;border-radius:50%;background:#2ec26b;box-shadow:0 0 8px #2ec26b}
+
+/* OUR SPACE GALLERY */
+.space-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.space-grid .tile{aspect-ratio:16/11;border-radius:18px;border:1px solid var(--glass-line);position:relative;overflow:hidden;box-shadow:var(--float);transition:.25s;
+  background:radial-gradient(120% 120% at 60% 30%,#2b2f34,#15171a 60%,#0c0d0f);display:flex;align-items:flex-end}
+.space-grid .tile .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.space-grid .tile .play i{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-style:normal;color:#fff;background:rgba(225,29,34,.85);font-size:18px}
+.space-grid .tile .cap{position:relative;z-index:2;width:100%;padding:16px;color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.space-grid .tile .cap b{font-size:15px;font-weight:700;letter-spacing:.3px;color:#fff}
+.space-grid .tile .cap span{display:block;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.8);margin-top:3px}
+.space-grid .tile .tag{position:absolute;top:14px;left:14px;z-index:2;font-size:10px;letter-spacing:1px;font-weight:700;
+  padding:5px 11px;border-radius:30px;background:rgba(0,0,0,.55);border:1px solid var(--line)}
+.space-grid .tile .tag.v{background:var(--red);border-color:var(--red)}
+.space-grid .tile:hover{transform:translateY(-5px);box-shadow:var(--float-hi)}
+.space-note{text-align:center;font-size:12px;letter-spacing:1px;color:var(--steel-light);margin-top:26px}
+
+/* VIDEO REVIEWS — 3D COVERFLOW CAROUSEL */
+.vidrev-head{text-align:center;margin:60px 0 30px}
+.vidrev-head .eyebrow{display:block;margin-bottom:8px}
+.vidrev-head h3{font-size:26px;text-transform:uppercase}
+
+.coverflow{position:relative;width:100%;margin:0 auto}
+.cf-stage{position:relative;height:560px;perspective:1600px;overflow:hidden;isolation:isolate;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.cf-track{position:absolute;inset:0;transform-style:preserve-3d}
+.vidrev{position:absolute;top:50%;left:50%;width:300px;aspect-ratio:9/14;
+  border-radius:20px;border:1px solid var(--glass-line);overflow:hidden;background:#0b0c0e;
+  box-shadow:var(--float);cursor:pointer;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  transition:transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, box-shadow .35s ease, filter .55s ease;
+  will-change:transform,opacity}
+/* once JS initializes the carousel, cards become visible & positioned */
+.coverflow:not(.cf-ready) .cf-track .vidrev{opacity:0 !important;pointer-events:none}
+.vidrev video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b0c0e;display:block}
+.vidrev::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,0) 38%,rgba(0,0,0,.62))}
+/* dim and desaturate the side cards so the center pops */
+.vidrev:not(.is-center){filter:brightness(.55) saturate(.8)}
+.vidrev.is-center{box-shadow:var(--float-hi),0 0 0 1px var(--glass-line-hi)}
+
+.vidrev .cap{position:absolute;left:0;right:0;bottom:0;z-index:2;width:100%;padding:16px;color:#fff;pointer-events:none;
+  background:linear-gradient(transparent,rgba(0,0,0,.9));opacity:0;transition:opacity .4s ease}
+.vidrev.is-center .cap{opacity:1}
+.vidrev .cap b{font-size:15px;font-weight:700;color:#fff}
+.vidrev .cap span{display:block;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.8);margin-top:3px}
+/* mute / unmute button — only interactive on the centered card */
+.vidrev .mute{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--glass-line);background:rgba(15,15,18,.62);color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;opacity:0;pointer-events:none;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.vidrev.is-center .mute{opacity:1;pointer-events:auto}
+.vidrev .mute:hover{background:var(--red)}
+.vidrev .mute:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.vidrev .mute svg{width:20px;height:20px;display:block;fill:currentColor}
+.vidrev .mute .ic-off{display:none}
+.vidrev.is-unmuted .mute{background:var(--red)}
+.vidrev.is-unmuted .mute .ic-on{display:none}
+.vidrev.is-unmuted .mute .ic-off{display:block}
+/* tap-to-play overlay (only if autoplay blocked) */
+.vidrev .tapplay{position:absolute;inset:0;z-index:2;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.25);cursor:pointer;border:0}
+.vidrev.needs-tap.is-center .tapplay{display:flex}
+.vidrev .tapplay i{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-style:normal;color:#fff;background:rgba(225,29,34,.9);font-size:20px}
+
+/* arrows */
+.cf-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--glass-line);background:rgba(15,15,18,.6);color:#fff;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.cf-nav:hover{background:var(--red);border-color:var(--red)}
+.cf-nav:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.cf-prev{left:8px}
+.cf-next{right:8px}
+/* dots */
+.cf-dots{display:flex;gap:9px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.cf-dot{width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.28);transition:.25s}
+.cf-dot.active{background:var(--red);width:24px;border-radius:5px}
+.cf-dot:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+@media(max-width:720px){
+  .cf-stage{height:480px}
+  .vidrev{width:240px}
+  .cf-nav{width:42px;height:42px}
+}
+@media(prefers-reduced-motion:reduce){
+  .vidrev{transition:none}
+}
+
+/* REVIEWS */
+.reviews{background:transparent}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:18px;padding:28px;box-shadow:var(--float);transition:.25s}
+.rev:hover{transform:translateY(-5px);box-shadow:var(--float-hi)}
+.stars{color:#FFC107;letter-spacing:3px;font-size:16px;margin-bottom:12px}
+.rev p{color:var(--steel-light);font-size:14px;font-style:italic}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:18px}
+.rev .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.rev .av.av-img{background-size:cover;background-position:center;background-repeat:no-repeat}
+.rev .who b{font-size:14px}.rev .who small{display:block;color:var(--muted);font-size:12px}
+.gbadge{display:inline-flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:16px;padding:16px 26px;margin-top:14px;box-shadow:var(--float)}
+.gbadge .big{font-size:34px;font-weight:800}
+.gbadge .g{color:#4285F4;font-weight:800}.gbadge .g span:nth-child(2){color:#EA4335}.gbadge .g span:nth-child(3){color:#FBBC05}.gbadge .g span:nth-child(4){color:#4285F4}.gbadge .g span:nth-child(5){color:#34A853}
+.gbadge{text-decoration:none;color:inherit;transition:.2s}
+.gbadge:hover{transform:translateY(-2px);box-shadow:var(--float-hi);border-color:var(--glass-line-hi)}
+.gbadge .gcount{font-size:11px;letter-spacing:1px;color:var(--muted);margin-top:3px;text-transform:uppercase}
+.rev-hidden{display:none}
+.rev-grid.show-all .rev-hidden{display:block}
+.rev-more{text-align:center;margin-top:28px}
+.rev-more .btn{cursor:pointer}
+
+/* TRAINERS */
+.trainers{background:transparent}
+.tr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+/* CAREERS */
+.careers-intro{text-align:center;max-width:620px;margin:0 auto 40px;color:var(--steel-light);font-size:16px;line-height:1.6}
+
+/* CAREERS APPLICATION FORM */
+.career-form{max-width:680px;margin:0 auto;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);border-radius:22px;box-shadow:var(--float);padding:38px 36px}
+.career-form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.career-form .field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.career-form label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--steel-light)}
+.career-form input,.career-form select,.career-form textarea{width:100%;background:rgba(255,255,255,.05);
+  border:1px solid var(--glass-line);border-radius:11px;padding:13px 15px;color:var(--white);font-size:14px;font-family:inherit;transition:.2s;outline:none}
+.career-form input::placeholder,.career-form textarea::placeholder{color:#7c7e85}
+.career-form input:focus,.career-form select:focus,.career-form textarea:focus{border-color:var(--red);background:rgba(255,255,255,.08)}
+.career-form select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23ED1C24' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 15px center}
+.career-form select option{background:#161619;color:var(--white)}
+.career-form textarea{resize:vertical;min-height:90px}
+/* resume upload */
+.resume-upload{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(255,255,255,.04);
+  border:1px dashed var(--glass-line-hi);border-radius:12px;padding:16px 18px}
+.resume-btn{display:inline-flex;align-items:center;gap:9px;background:rgba(237,28,36,.12);border:1px solid var(--red);
+  color:var(--white);border-radius:10px;padding:11px 20px;font-size:13px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:.2s;white-space:nowrap}
+.resume-btn:hover{background:var(--red);transform:translateY(-2px)}
+.resume-name{font-size:13px;color:var(--steel-light)}
+.resume-hint{font-size:11.5px;color:var(--muted);width:100%}
+.career-form input[type=file]{display:none}
+.career-submit{width:100%;margin-top:20px;background:var(--red);color:#fff;border:0;border-radius:12px;padding:16px;
+  font-weight:800;letter-spacing:1px;font-size:15px;text-transform:uppercase;cursor:pointer;transition:.2s}
+.career-submit:hover{background:var(--red-dark);transform:translateY(-2px)}
+.career-success{text-align:center;padding:34px 0}
+.career-success .tick{width:70px;height:70px;border-radius:50%;background:rgba(46,194,107,.15);border:1px solid #2ec26b;
+  color:#2ec26b;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.career-success h3{font-size:24px;text-transform:uppercase;margin-bottom:8px}
+.career-success p{color:var(--steel-light);font-size:15px}
+@media(max-width:560px){.career-form{padding:30px 22px}.career-form .row{grid-template-columns:1fr}}
+.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:920px;margin:0 auto}
+.job{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);border-radius:18px;box-shadow:var(--float);padding:26px 26px;
+  display:flex;flex-direction:column;gap:12px;transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .25s,box-shadow .3s}
+.job:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:var(--float-hi)}
+.job .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.job h4{font-size:19px;text-transform:uppercase;letter-spacing:.3px;line-height:1.2}
+.job .jtype{flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--red);
+  border:1px solid var(--glass-line-hi);border-radius:30px;padding:5px 12px;white-space:nowrap}
+.job .meta{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);letter-spacing:.5px}
+.job .meta span{display:inline-flex;align-items:center;gap:5px}
+.job p{color:var(--steel-light);font-size:14px;line-height:1.55}
+.job .apply{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:700;letter-spacing:1px;
+  color:var(--white);background:var(--red);border-radius:30px;padding:10px 22px;text-decoration:none;transition:.2s}
+.job .apply:hover{background:var(--red-dark);transform:translateY(-2px)}
+.careers-foot{text-align:center;margin-top:38px;color:var(--muted);font-size:14px}
+.careers-foot a{color:var(--red);text-decoration:none;font-weight:700}
+.careers-foot a:hover{text-decoration:underline}
+@media(max-width:680px){.jobs{grid-template-columns:1fr}}
+.tr{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:18px;overflow:hidden;box-shadow:var(--float);transition:.25s}
+.tr:hover{transform:translateY(-5px);box-shadow:var(--float-hi)}
+.tr .pic{aspect-ratio:1;background:linear-gradient(135deg,#2a2a2e,#1a1a1e);background-size:cover;background-position:center top;display:flex;align-items:center;justify-content:center;font-size:0;color:transparent}
+.tr .info{padding:20px}
+.tr h4{font-size:17px;text-transform:uppercase}
+.tr .role{color:var(--red);font-size:12px;font-weight:700;letter-spacing:1px;margin:4px 0 10px}
+.tr .cert{color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:10px}
+
+/* CTA / CONTACT */
+.cta{background:
+   radial-gradient(700px 400px at 50% 0%, rgba(237,28,36,.18), transparent 60%),
+   linear-gradient(180deg,#101012,#0A0A0B);text-align:center}
+.cta h2{font-size:46px;text-transform:uppercase}
+.cta p{color:var(--muted);max-width:560px;margin:18px auto 30px;font-size:17px}
+.contact-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:40px;color:var(--steel-light);font-size:15px}
+.contact-row a{color:var(--steel-light);text-decoration:none}
+.contact-row b{color:var(--red);display:block;font-size:11px;letter-spacing:2px;margin-bottom:4px}
+
+/* FOOTER */
+footer{background:#070708;border-top:1px solid var(--line);padding:46px 0 30px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.foot .brand img{height:44px}
+.socials{display:flex;gap:14px}
+.socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--steel-light);text-decoration:none;font-weight:700;transition:.2s}
+.socials a:hover{border-color:var(--red);color:var(--red)}
+.copy{text-align:center;color:#55555c;font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:22px}
+
+@media(max-width:900px){
+ .hero .wrap{grid-template-columns:1fr}.herologo{display:none}.hero h1{font-size:44px}
+ .navlinks,.phone{display:none}
+ .cards3,.svc-grid,.trans-grid,.feed,.rev-grid,.tr-grid,.space-grid{grid-template-columns:1fr 1fr}
+ .sec-head h2,.cta h2{font-size:30px}
+}
+@media(max-width:560px){.cards3,.svc-grid,.trans-grid,.feed,.rev-grid,.tr-grid,.space-grid{grid-template-columns:1fr}}
+/* ENQUIRY POPUP MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(5,5,7,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{position:relative;width:100%;max-width:460px;background:linear-gradient(180deg,#161619,#0e0e10);
+  border:1px solid var(--glass-line);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:38px 34px 34px;
+  transform:translateY(24px) scale(.96);transition:transform .4s cubic-bezier(.22,1,.36,1);overflow:hidden}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal::before{content:"";position:absolute;top:-40%;right:-20%;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(237,28,36,.18),transparent 70%);pointer-events:none}
+.modal .close{position:absolute;top:16px;right:18px;width:34px;height:34px;border-radius:50%;border:1px solid var(--glass-line);
+  background:rgba(255,255,255,.06);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:3}
+.modal .close:hover{background:var(--red);border-color:var(--red);transform:rotate(90deg)}
+.modal .eyebrow{color:var(--red);font-weight:800;letter-spacing:3px;font-size:12px;text-transform:uppercase}
+.modal h3{font-size:25px;text-transform:uppercase;margin:8px 0 6px;line-height:1.15}
+.modal .sub{color:var(--steel-light);font-size:14px;margin-bottom:22px;line-height:1.5}
+.modal form{display:flex;flex-direction:column;gap:13px;position:relative;z-index:2}
+.modal input,.modal select,.modal textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--glass-line);
+  border-radius:11px;padding:13px 15px;color:var(--white);font-size:14px;font-family:inherit;transition:.2s;outline:none}
+.modal input::placeholder,.modal textarea::placeholder{color:#7c7e85}
+.modal input:focus,.modal select:focus,.modal textarea:focus{border-color:var(--red);background:rgba(255,255,255,.08)}
+.modal select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23ED1C24' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 15px center}
+.modal select option{background:#161619;color:var(--white)}
+.modal textarea{resize:vertical;min-height:70px}
+.modal .submit{margin-top:4px;background:var(--red);color:#fff;border:0;border-radius:11px;padding:14px;font-weight:800;
+  letter-spacing:1px;font-size:14px;text-transform:uppercase;cursor:pointer;transition:.2s}
+.modal .submit:hover{background:var(--red-dark);transform:translateY(-2px)}
+.modal .tiny{text-align:center;color:var(--muted);font-size:11.5px;margin-top:12px}
+.modal .success{text-align:center;padding:20px 0}
+.modal .success .tick{width:64px;height:64px;border-radius:50%;background:rgba(46,194,107,.15);border:1px solid #2ec26b;
+  color:#2ec26b;font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.modal .success h3{color:var(--white)}
+@media(max-width:480px){.modal{padding:32px 22px 26px}.modal h3{font-size:21px}}
+</style>
+</head>
+<body>
+
+<!-- ENQUIRY POPUP -->
+<div class="modal-overlay" id="enquiryModal" role="dialog" aria-modal="true" aria-labelledby="enqTitle">
+  <div class="modal">
+    <button class="close" id="enqClose" aria-label="Close">&#10005;</button>
+    <div id="enqContent">
+      <div class="eyebrow">Get Started</div>
+      <h3 id="enqTitle">Book Your First Session</h3>
+      <p class="sub">Try your first training session for just &#8377;200. Leave your details and our team will reach out to you.</p>
+      <form id="enquiryForm" novalidate>
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="tel" name="phone" placeholder="Phone number" required>
+        <input type="email" name="email" placeholder="Email (optional)">
+        <select name="interest" required>
+          <option value="" disabled selected>I'm interested in...</option>
+          <option>Weight Loss</option>
+          <option>Strength Training</option>
+          <option>Personal Training</option>
+          <option>Boxing &amp; MMA</option>
+          <option>Group Classes</option>
+          <option>Nutrition / Dietetics</option>
+          <option>General Enquiry</option>
+        </select>
+        <textarea name="message" placeholder="Your message (optional)"></textarea>
+        <button type="submit" class="submit">Send Enquiry</button>
+        <div class="tiny">We'll never share your details. No spam, ever.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- NAV -->
+<header>
+ <div class="wrap"><nav>
+  <div class="brand"><img src="assets/img/img_01_9798c833d4.png" alt="Cross Hammer"><div class="bn">CROSS<span>HAMMER</span></div></div>
+  <div class="navcta">
+   <a class="phone" href="tel:6309488555">63094 88555<small>CALL US</small></a>
+   <a class="btn" href="#contact">Book Now</a>
+  </div>
+ </nav></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+ <div class="hero-media">
+  <video class="hero-video" autoplay muted loop playsinline poster="">
+    <source src="assets/img/hero_bg.mp4" type="video/mp4">
+  </video>
+ </div>
+ <div class="hero-overlay"></div>
+ <div class="hero-grid"></div>
+ <div class="wrap">
+  <div>
+   <div class="tagband"><b>STOP.</b><span>DROP.</span><b>TRANSFORM.</b></div>
+   <h1>Specialized in<em>Transformation</em></h1>
+   <p class="lead">Certified trainers, clinical nutrition, and proven results. Cross Hammer is where everyday people become their strongest selves.</p>
+   <div class="herobtns">
+    <a class="btn" href="#contact">Try Your First Session @ ₹200</a>
+    <a class="btn ghost" href="#services">Explore Programs</a>
+   </div>
+  </div>
+  <div class="herologo"><img src="assets/img/img_01_9798c833d4.png" alt="Cross Hammer Logo"></div>
+ </div>
+</section>
+
+<!-- PAGE MENU -->
+<div class="wrap">
+ <ul class="pagemenu" id="pagemenu">
+  <li><a href="#why" data-tab="why" class="active">Why Us</a></li>
+  <li><a href="#services" data-tab="services">Services</a></li>
+  <li><a href="#transformations" data-tab="transformations">Transformations</a></li>
+  <li><a href="#stories" data-tab="stories">Stories &amp; Highlights</a></li>
+  <li><a href="#ourspace" data-tab="ourspace">Our Space</a></li>
+  <li><a href="#trainers" data-tab="trainers">Trainers</a></li>
+  <li><a href="#careers" data-tab="careers">Careers</a></li>
+  <li><a href="#contact" data-tab="contact">Contact</a></li>
+ </ul>
+</div>
+
+<!-- WHY -->
+<section class="why section-pad tab-section" id="why" data-tab="why">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">What Sets Us Apart</div><h2>The Cross Hammer Edge</h2></div>
+  <div class="edge-grid">
+   <article class="edge edge-feature" tabindex="0">
+    <div class="edge-ic">&#9889;</div>
+    <h3>Specialized in Transformation</h3>
+    <p class="edge-teaser">Built for real change, not generic routines.</p>
+    <div class="edge-more">
+     <p>Every program is engineered around measurable body transformation &mdash; fat loss, strength, and conditioning &mdash; with progress tracked and plans adjusted as you improve. No copy-paste workouts. Just a clear path from where you are to your strongest self.</p>
+     <ul class="edge-points">
+      <li>Goal-based programming</li>
+      <li>Progress tracked weekly</li>
+      <li>Plans that adapt to you</li>
+     </ul>
+    </div>
+   </article>
+
+   <article class="edge" tabindex="0">
+    <div class="edge-ic">&#129385;</div>
+    <h3>Certified Nutritionist</h3>
+    <p class="edge-teaser">Clinical nutrition, personalised to you.</p>
+    <div class="edge-more">
+     <p>Guidance from a certified nutritionist using clinical dietetics &mdash; meal plans matched to your body, goals, and routine, so training and diet finally work together.</p>
+    </div>
+   </article>
+
+   <article class="edge" tabindex="0">
+    <div class="edge-ic">&#127947;</div>
+    <h3>Certified Personal Trainers</h3>
+    <p class="edge-teaser">Coached by qualified pros, every session.</p>
+    <div class="edge-more">
+     <p>Train under certified personal trainers who obsess over form first &mdash; correcting technique, pushing you safely, and keeping you consistent. Members consistently name their trainers as the reason they stay.</p>
+    </div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services section-pad tab-section" id="services" data-tab="services">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Programs &amp; Services</div><h2>Train Your Way</h2></div>
+  <div class="svc-grid">
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_03_8d269154a9.jpg');"></div><div class="svc-body"><div class="n">01</div><h4>Weight Loss</h4><p>Structured fat-loss plans built around your body and pace.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_05_b34089cd82.jpg');"></div><div class="svc-body"><div class="n">02</div><h4>Strength Training</h4><p>Build raw, coached strength with proper form every rep.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_04_c98f91797a.jpg');"></div><div class="svc-body"><div class="n">03</div><h4>Functional / HIIT</h4><p>High-intensity conditioning that burns and builds.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_06_396c99e0fd.jpg');"></div><div class="svc-body"><div class="n">04</div><h4>Muscle Building</h4><p>Hypertrophy-focused training for real, lasting size.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_07_ea10d52e86.jpg');"></div><div class="svc-body"><div class="n">05</div><h4>Resistance Training</h4><p>Tone and strengthen with progressive resistance work.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_08_c007765ebf.jpg');"></div><div class="svc-body"><div class="n">06</div><h4>Body Composition</h4><p>BMI &amp; full analysis to track real progress.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_02_47c78644bb.jpg');"></div><div class="svc-body"><div class="n">07</div><h4>Personal Training</h4><p>One-on-one coaching built around your goals.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_09_1c63d51ed7.jpg');"></div><div class="svc-body"><div class="n">08</div><h4>Boxing &amp; MMA</h4><p>Skill-based combat training for power and confidence.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_03_8d269154a9.jpg');"></div><div class="svc-body"><div class="n">09</div><h4>Clinical Dietetics</h4><p>Certified nutrition plans from a clinical expert.</p></div></div>
+   <div class="svc"><div class="svc-img" style="background-image:url('assets/img/img_05_b34089cd82.jpg');"></div><div class="svc-body"><div class="n">10</div><h4>Group Classes</h4><p>Energetic group sessions to keep you consistent.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- TRANSFORMATIONS -->
+<section class="trans section-pad tab-section" id="transformations" data-tab="transformations">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Real Results</div><h2>Transformations</h2></div>
+  <div class="trans-grid">
+   <div class="tcard"><div class="ba"><div class="before" style="background-image:url('assets/img/img_02_47c78644bb.jpg');background-size:cover;background-position:center;">BEFORE</div><div class="after" style="background-image:url('assets/img/img_04_c98f91797a.jpg');background-size:cover;background-position:center;">AFTER</div></div><span class="vtag">&#9654; VIDEO</span><div class="label"><b>-18 KG in 5 Months</b><span>Weight Loss Program</span></div></div>
+   <div class="tcard"><div class="ba"><div class="before" style="background-image:url('assets/img/img_03_8d269154a9.jpg');background-size:cover;background-position:center;">BEFORE</div><div class="after" style="background-image:url('assets/img/img_08_c007765ebf.jpg');background-size:cover;background-position:center;">AFTER</div></div><span class="vtag">&#9654; VIDEO</span><div class="label"><b>+9 KG Lean Muscle</b><span>Muscle Building</span></div></div>
+   <div class="tcard"><div class="ba"><div class="before" style="background-image:url('assets/img/img_06_396c99e0fd.jpg');background-size:cover;background-position:center;">BEFORE</div><div class="after" style="background-image:url('assets/img/img_05_b34089cd82.jpg');background-size:cover;background-position:center;">AFTER</div></div><span class="vtag">&#9654; VIDEO</span><div class="label"><b>Full Body Recomp</b><span>Strength + Nutrition</span></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- SOCIAL FEED -->
+<section class="social section-pad tab-section" id="stories" data-tab="stories">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Stories &amp; Highlights</div><h2>Live From Our Socials</h2>
+   <div class="auto-tag"><span class="dot"></span> Auto-synced daily from Instagram &amp; Facebook</div>
+  </div>
+  <div class="feed">
+   <div class="post" style="background-image:url('assets/img/img_02_47c78644bb.jpg');background-size:cover;background-position:center;"><span class="ph">&#128248;</span><span class="pl">@CROSSHAMMER</span></div>
+   <div class="post" style="background-image:url('assets/img/img_08_c007765ebf.jpg');background-size:cover;background-position:center;"><span class="ph">&#127947;</span><span class="pl">REELS</span></div>
+   <div class="post" style="background-image:url('assets/img/img_07_ea10d52e86.jpg');background-size:cover;background-position:center;"><span class="ph">&#129336;</span><span class="pl">POST</span></div>
+   <div class="post" style="background-image:url('assets/img/img_05_b34089cd82.jpg');background-size:cover;background-position:center;"><span class="ph">&#127942;</span><span class="pl">WIN</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- OUR SPACE -->
+<section class="social section-pad tab-section" id="ourspace" data-tab="ourspace">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Inside Cross Hammer</div><h2>Our Space</h2></div>
+  <div class="space-grid">
+   <div class="tile" style="background-image:url('assets/img/img_06_396c99e0fd.jpg');background-size:cover;background-position:center;"><span class="tag v">&#9654; VIDEO</span><div class="play"><i>&#9654;</i></div><div class="cap"><b>Strength Floor</b><span>FREE WEIGHTS</span></div></div>
+   <div class="tile" style="background-image:url('assets/img/img_02_47c78644bb.jpg');background-size:cover;background-position:center;"><span class="tag">PHOTO</span><div class="cap"><b>Cardio Zone</b><span>ENDURANCE</span></div></div>
+   <div class="tile" style="background-image:url('assets/img/img_04_c98f91797a.jpg');background-size:cover;background-position:center;"><span class="tag v">&#9654; VIDEO</span><div class="play"><i>&#9654;</i></div><div class="cap"><b>HIIT Studio</b><span>GROUP CLASSES</span></div></div>
+   <div class="tile" style="background-image:url('assets/img/img_05_b34089cd82.jpg');background-size:cover;background-position:center;"><span class="tag v">&#9654; VIDEO</span><div class="play"><i>&#9654;</i></div><div class="cap"><b>Boxing Ring</b><span>BOXING &amp; MMA</span></div></div>
+   <div class="tile" style="background-image:url('assets/img/img_03_8d269154a9.jpg');background-size:cover;background-position:center;"><span class="tag">PHOTO</span><div class="cap"><b>Functional Area</b><span>FUNCTIONAL TRAINING</span></div></div>
+   <div class="tile" style="background-image:url('assets/img/img_08_c007765ebf.jpg');background-size:cover;background-position:center;"><span class="tag v">&#9654; VIDEO</span><div class="play"><i>&#9654;</i></div><div class="cap"><b>PT Floor</b><span>PERSONAL TRAINING</span></div></div>
+  </div>
+  <div class="space-note">Sample placeholders &mdash; drop in real gym photos &amp; videos</div>
+ </div>
+</section>
+
+<!-- TRAINERS -->
+<section class="trainers section-pad tab-section" id="trainers" data-tab="trainers">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Meet The Team</div><h2>Certified Trainers</h2></div>
+  <div class="tr-grid">
+   <div class="tr"><div class="pic" style="background-image:url('assets/img/img_03_8d269154a9.jpg');background-size:cover;background-position:center;">&#128100;</div><div class="info"><h4>Coach Name</h4><div class="role">HEAD TRAINER</div><div class="cert">Certified Personal Trainer • Strength &amp; Conditioning</div></div></div>
+   <div class="tr"><div class="pic" style="background-image:url('assets/img/img_09_1c63d51ed7.jpg');background-size:cover;background-position:center;">&#128100;</div><div class="info"><h4>Coach Name</h4><div class="role">NUTRITIONIST</div><div class="cert">Certified Nutritionist • Clinical Dietetics</div></div></div>
+   <div class="tr"><div class="pic" style="background-image:url('assets/img/img_05_b34089cd82.jpg');background-size:cover;background-position:center;">&#128100;</div><div class="info"><h4>Coach Name</h4><div class="role">MMA COACH</div><div class="cert">Boxing &amp; MMA Specialist</div></div></div>
+   <div class="tr"><div class="pic" style="background-image:url('assets/img/img_06_396c99e0fd.jpg');background-size:cover;background-position:center;">&#128100;</div><div class="info"><h4>Coach Name</h4><div class="role">PT SPECIALIST</div><div class="cert">Functional &amp; HIIT Certified</div></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- CAREERS -->
+<section class="trainers section-pad tab-section" id="careers" data-tab="careers">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Join The Team</div><h2>Careers At Cross Hammer</h2></div>
+  <p class="careers-intro">We're always looking for passionate, certified professionals who live and breathe fitness. Fill in the form below and attach your resume — our team will get back to you.</p>
+  <div class="career-form" id="careerFormWrap">
+   <form id="careerForm" novalidate>
+    <div class="row">
+     <div class="field"><label>Full Name</label><input type="text" name="cname" placeholder="Your full name" required></div>
+     <div class="field"><label>Phone</label><input type="tel" name="cphone" placeholder="Phone number" required></div>
+    </div>
+    <div class="row">
+     <div class="field"><label>Email</label><input type="email" name="cemail" placeholder="you@email.com" required></div>
+     <div class="field"><label>Role You're Applying For</label>
+      <select name="crole" required>
+       <option value="" disabled selected>Select a role...</option>
+       <option>Personal Trainer</option>
+       <option>Clinical Nutritionist / Dietitian</option>
+       <option>Boxing &amp; MMA Coach</option>
+       <option>Front Desk &amp; Membership</option>
+       <option>Other</option>
+      </select>
+     </div>
+    </div>
+    <div class="field"><label>Experience</label><input type="text" name="cexp" placeholder="e.g. 2 years as a certified trainer"></div>
+    <div class="field"><label>Message</label><textarea name="cmsg" placeholder="Tell us a bit about yourself and why you'd like to join Cross Hammer"></textarea></div>
+    <div class="field"><label>Resume / CV</label>
+     <div class="resume-upload">
+      <label class="resume-btn" for="resumeInput">&#128206; Upload Resume</label>
+      <span class="resume-name" id="resumeName">No file chosen</span>
+      <input type="file" id="resumeInput" name="resume" accept=".pdf,.doc,.docx">
+      <span class="resume-hint">Accepted formats: PDF, DOC, DOCX (max 5MB)</span>
+     </div>
+    </div>
+    <button type="submit" class="career-submit">Submit Application</button>
+   </form>
+  </div>
+  <div class="careers-foot">Prefer email? Send your resume to <a href="mailto:Crosshammer.fit@gmail.com">Crosshammer.fit@gmail.com</a></div>
+ </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta section-pad tab-section" id="contact" data-tab="contact">
+ <div class="wrap">
+  <div class="eyebrow">Start Today</div>
+  <h2>Your Transformation Begins Now</h2>
+  <p>Book your first 45-minute training session for just ₹200 and see what Cross Hammer can do for you.</p>
+  <a class="btn" href="tel:6309488555">Book Your ₹200 Session</a>
+  <div class="contact-row">
+   <div><b>CALL</b><a href="tel:6309488555">63094 88555</a></div>
+   <div><b>EMAIL</b><a href="mailto:Crosshammer.fit@gmail.com">Crosshammer.fit@gmail.com</a></div>
+   <div><b>FOLLOW</b><a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Facebook</a></div>
+  </div>
+ </div>
+</section>
+
+<!-- REVIEWS (always visible on every tab) -->
+<section class="reviews section-pad" id="reviews">
+ <div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Testimonials</div><h2>What Members Say</h2>
+   <a class="gbadge" id="gReviewBadge" href="https://www.google.com/maps/place/?q=place_id:ChIJMWiFnqSVyzsRJ7_HDBfPn4g" target="_blank" rel="noopener" aria-label="Read our Google reviews"><div class="big" id="gRating">4.9</div><div><div class="g"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span> Reviews</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="gcount" id="gCount">685 reviews</div></div></a>
+  </div>
+  <div class="rev-grid" id="revGrid" data-state="fallback">
+<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Joined recently and the experience has been great. Motivating atmosphere, well-maintained equipment, clean space. My trainer Shyam is supportive and really knows his stuff on form and goals."</p><div class="who"><div class="av">S</div><div><b>Shyam's client</b><small>Personal Training · Shyam</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Impressed by the professionalism. Trainers give excellent guidance on form and technique, and the equipment is well kept. Special shout-out to my trainer Sandeep for the attention to detail."</p><div class="who"><div class="av">S</div><div><b>Member</b><small>Strength Training · Sandeep</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Starting a new gym felt intimidating, but the staff made me feel at home. As a beginner nervous about weights, Shyam was patient and tailored everything to my level. I'm stronger and more confident now."</p><div class="who"><div class="av">K</div><div><b>Beginner member</b><small>Beginner Friendly · Shyam</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"A month in on PT with Sameer and I've learned proper form and how to stay consistent. From stretches to workout patterns, he's been an excellent guide. Great machines and environment too."</p><div class="who"><div class="av">S</div><div><b>Sameer's client</b><small>Personal Training · Sameer</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Been training here a while and it's been great. My trainer Dutta won't chase reps until your form is right, and adapts the plan when needed. Well-equipped, well-maintained, and polite staff."</p><div class="who"><div class="av">D</div><div><b>Member</b><small>Personal Training · Dutta</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"One stop for a healthy transformation. Excellent gym with excellent, well-experienced trainers and the best equipment. Easily one of the best in Manikonda."</p><div class="who"><div class="av">R</div><div><b>Member</b><small>Transformation</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"High hygiene standards, sanitised equipment, and a friendly, accommodating team. Loads of space and an exhaustive equipment list. Would strongly recommend to anyone looking for a great gym."</p><div class="who"><div class="av">A</div><div><b>Member</b><small>Hygiene & Safety</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"This is the place to stop, drop and transform — the only question is how committed you are. Friendly, polite staff and professional, properly skilled trainers."</p><div class="who"><div class="av">S</div><div><b>Member</b><small>Stop. Drop. Transform.</small></div></div></div>
+  </div>
+  <div class="rev-more"><button type="button" id="revMoreBtn" class="btn ghost" aria-expanded="false">Show more reviews</button></div>
+
+  <div class="vidrev-head"><div class="eyebrow">Watch Their Stories</div><h3>Video Reviews</h3></div>
+  <div class="coverflow" id="coverflow" aria-roledescription="carousel" aria-label="Video member stories">
+   <button type="button" class="cf-nav cf-prev" id="cfPrev" aria-label="Previous video">&#10094;</button>
+   <div class="cf-stage"><div class="cf-track" id="cfTrack">
+
+   <div class="vidrev" data-name="A Counselor's Take"><video src="assets/videos/test_1.mp4" poster="assets/posters/test_1.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play A Counselor's Take"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute A Counselor's Take" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>A Counselor's Take</b><span>VERIFIED MEMBER</span></div></div>
+   <div class="vidrev" data-name="Masam's Journey"><video src="assets/videos/test_2.mp4" poster="assets/posters/test_2.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Masam's Journey"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Masam's Journey" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Masam's Journey</b><span>TWO YEARS STRONG</span></div></div>
+   <div class="vidrev" data-name="Desk to the Gym"><video src="assets/videos/test_3.mp4" poster="assets/posters/test_3.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Desk to the Gym"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Desk to the Gym" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Desk to the Gym</b><span>SOFTWARE ENGINEER, MANIKONDA</span></div></div>
+   <div class="vidrev" data-name="Race-Day Ready"><video src="assets/videos/test_4.mp4" poster="assets/posters/test_4.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Race-Day Ready"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Race-Day Ready" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Race-Day Ready</b><span>HITEC CITY RUN 2026</span></div></div>
+   <div class="vidrev" data-name="Showing Up Daily"><video src="assets/videos/test_5.mp4" poster="assets/posters/test_5.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Showing Up Daily"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Showing Up Daily" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Showing Up Daily</b><span>CONSISTENT MEMBER</span></div></div>
+   <div class="vidrev" data-name="Her Transformation"><video src="assets/videos/test_6.mp4" poster="assets/posters/test_6.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Her Transformation"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Her Transformation" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Her Transformation</b><span>MEMBER STORY</span></div></div>
+   <div class="vidrev" data-name="Stronger Every Week"><video src="assets/videos/test_7.mp4" poster="assets/posters/test_7.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Stronger Every Week"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Stronger Every Week" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Stronger Every Week</b><span>MEMBER STORY</span></div></div>
+   <div class="vidrev" data-name="Finding Her Pace"><video src="assets/videos/test_8.mp4" poster="assets/posters/test_8.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Finding Her Pace"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Finding Her Pace" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Finding Her Pace</b><span>MEMBER STORY</span></div></div>
+   <div class="vidrev" data-name="Shomik's Story"><video src="assets/videos/test_10.mp4" poster="assets/posters/test_10.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><button type="button" class="tapplay" aria-label="Play Shomik's Story"><i>&#9654;</i></button><button type="button" class="mute" aria-label="Unmute Shomik's Story" aria-pressed="false"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.9 8.9 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.94 8.94 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/><path d="M19 12c0-3.1-1.9-5.7-4.5-6.7v2.1c1.5.8 2.5 2.5 2.5 4.6s-1 3.8-2.5 4.6v2.1C17.1 17.7 19 15.1 19 12z"/></svg></button><div class="cap"><b>Shomik's Story</b><span>MEMBER STORY</span></div></div>
+   </div></div>
+   <button type="button" class="cf-nav cf-next" id="cfNext" aria-label="Next video">&#10095;</button>
+  </div>
+  <div class="cf-dots" id="cfDots" role="tablist" aria-label="Choose video"></div>
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <div class="wrap">
+  <div class="foot">
+   <div class="brand"><img src="assets/img/img_01_9798c833d4.png" alt="Cross Hammer"></div>
+   <div class="socials"><a href="#">IG</a><a href="#">FB</a><a href="tel:6309488555">&#9742;</a></div>
+  </div>
+  <div class="copy">© 2026 Cross Hammer Fitness · Stop. Drop. Transform. · Crosshammer.fit@gmail.com · 63094 88555<br>Sample homepage mockup for review — not the final build.</div>
+ </div>
+</footer>
+
+<script>
+// VIDEO REVIEWS — 3D COVERFLOW CAROUSEL
+(function(){
+  var track=document.getElementById('cfTrack');
+  var stage=document.querySelector('.cf-stage');
+  var cf=document.getElementById('coverflow');
+  if(!track||!cf) return;
+  var tiles=Array.prototype.slice.call(track.querySelectorAll('.vidrev'));
+  if(!tiles.length) return;
+  var dotsWrap=document.getElementById('cfDots');
+  var prevBtn=document.getElementById('cfPrev');
+  var nextBtn=document.getElementById('cfNext');
+  var n=tiles.length;
+  var current=0;
+  var inView=true;
+
+  // layout constants (kept in sync with CSS card width)
+  function spacing(){ return window.innerWidth<=720 ? 150 : 200; }
+  var MAXSIDE=3; // how many cards show on each side
+
+  function nameOf(t){ return t.getAttribute('data-name')||'video'; }
+
+  function muteAllExcept(except){
+    tiles.forEach(function(t){
+      if(t===except) return;
+      var v=t.querySelector('video'); if(v) v.muted=true;
+      t.classList.remove('is-unmuted');
+      var b=t.querySelector('.mute');
+      if(b){b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Unmute '+nameOf(t));}
+    });
+  }
+
+  function layout(){
+    var gap=spacing();
+    tiles.forEach(function(t,i){
+      var off=i-current;
+      var aoff=Math.abs(off);
+      var isCenter=(off===0);
+      t.classList.toggle('is-center', isCenter);
+      if(aoff>MAXSIDE){
+        // park far cards off-stage, hidden
+        t.style.opacity='0';
+        t.style.pointerEvents='none';
+        t.style.transform='translate(-50%,-50%) translateX('+(off*gap)+'px) scale(.4)';
+        t.style.zIndex=0;
+        return;
+      }
+      var translateX=off*gap;
+      var rotateY=off===0?0:(off<0?32:-32);
+      var scale=isCenter?1:(0.82-(aoff-1)*0.06);
+      var opacity=isCenter?1:(0.85-(aoff-1)*0.18);
+      t.style.opacity=String(Math.max(opacity,0.25));
+      t.style.pointerEvents='auto';
+      t.style.zIndex=String(100-aoff);
+      t.style.transform='translate(-50%,-50%) translateX('+translateX+'px) rotateY('+rotateY+'deg) scale('+scale+')';
+    });
+    // dots
+    if(dotsWrap){
+      Array.prototype.forEach.call(dotsWrap.children,function(d,i){
+        d.classList.toggle('active', i===current);
+        d.setAttribute('aria-selected', i===current?'true':'false');
+      });
+    }
+    playCenter();
+  }
+
+  function playCenter(){
+    tiles.forEach(function(t,i){
+      var v=t.querySelector('video'); if(!v) return;
+      if(i===current && inView){
+        if(!t.classList.contains('is-unmuted')) v.muted=true;
+        var p=v.play(); if(p&&p.catch){ p.catch(function(){ t.classList.add('needs-tap'); }); }
+      } else {
+        v.pause();
+        if(!t.classList.contains('is-unmuted')){ /* keep position */ }
+      }
+    });
+  }
+
+  function go(i){
+    current=(i%n+n)%n;
+    layout();
+  }
+  function next(){ go(current+1); }
+  function prev(){ go(current-1); }
+
+  // build dots
+  if(dotsWrap){
+    tiles.forEach(function(t,i){
+      var d=document.createElement('button');
+      d.type='button'; d.className='cf-dot'; d.setAttribute('role','tab');
+      d.setAttribute('aria-label','Go to video '+(i+1));
+      d.addEventListener('click', function(){ stopAuto(); go(i); });
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  // per-tile interactions
+  tiles.forEach(function(tile,i){
+    var v=tile.querySelector('video');
+    var muteBtn=tile.querySelector('.mute');
+    var tapBtn=tile.querySelector('.tapplay');
+
+    // clicking a side card brings it to center; clicking the CENTER video toggles audio
+    tile.addEventListener('click', function(e){
+      if(e.target.closest('.mute')||e.target.closest('.tapplay')) return;
+      if(i!==current){ stopAuto(); go(i); return; }
+      // center card body tapped -> toggle this video's audio
+      if(muteBtn){ muteBtn.click(); }
+    });
+
+    if(tapBtn){
+      tapBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        tile.classList.remove('needs-tap');
+        if(v){ v.muted=true; v.play().catch(function(){}); }
+      });
+    }
+
+    if(muteBtn){
+      muteBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(!v) return;
+        if(v.muted){
+          muteAllExcept(tile);
+          v.muted=false;
+          v.volume=1;
+          tile.classList.add('is-unmuted');
+          muteBtn.setAttribute('aria-pressed','true');
+          muteBtn.setAttribute('aria-label','Mute '+nameOf(tile));
+          stopAuto(); // stop auto-advance while listening
+          // play AFTER unmuting, within this user gesture, so audio is allowed
+          var p=v.play();
+          if(p&&p.catch){ p.catch(function(){ /* if blocked, leave unmuted state; user can tap again */ }); }
+        } else {
+          v.muted=true;
+          tile.classList.remove('is-unmuted');
+          muteBtn.setAttribute('aria-pressed','false');
+          muteBtn.setAttribute('aria-label','Unmute '+nameOf(tile));
+        }
+      });
+    }
+  });
+
+  // arrows
+  if(prevBtn) prevBtn.addEventListener('click', function(){ stopAuto(); prev(); });
+  if(nextBtn) nextBtn.addEventListener('click', function(){ stopAuto(); next(); });
+
+  // keyboard
+  cf.setAttribute('tabindex','0');
+  cf.addEventListener('keydown', function(e){
+    if(e.key==='ArrowLeft'){ stopAuto(); prev(); }
+    else if(e.key==='ArrowRight'){ stopAuto(); next(); }
+  });
+
+  // touch swipe
+  var sx=0, sdx=0, swiping=false;
+  stage.addEventListener('touchstart', function(e){ swiping=true; sx=e.touches[0].clientX; sdx=0; }, {passive:true});
+  stage.addEventListener('touchmove', function(e){ if(swiping){ sdx=e.touches[0].clientX-sx; } }, {passive:true});
+  stage.addEventListener('touchend', function(){
+    if(!swiping) return; swiping=false;
+    if(Math.abs(sdx)>40){ stopAuto(); (sdx<0?next:prev)(); }
+  });
+
+  // auto-advance (slideshow). Pauses if user unmutes or interacts.
+  var AUTO_MS=4500, timer=null, autoOn=true;
+  function startAuto(){ if(!autoOn) return; clearInterval(timer); timer=setInterval(function(){
+    // don't advance while a video is unmuted (user is listening)
+    var listening=tiles.some(function(t){return t.classList.contains('is-unmuted');});
+    if(!listening && inView && !document.hidden) next();
+  }, AUTO_MS); }
+  function stopAuto(){ autoOn=false; clearInterval(timer); }
+
+  // pause/resume when section enters/leaves viewport
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        inView=en.isIntersecting;
+        if(inView){ playCenter(); } else {
+          tiles.forEach(function(t){ var v=t.querySelector('video'); if(v) v.pause(); });
+        }
+      });
+    }, {threshold:0.35});
+    io.observe(stage);
+  }
+
+  window.addEventListener('resize', layout);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) playCenter(); });
+
+  // init
+  cf.classList.add('cf-ready');
+  go(0);
+  startAuto();
+})();
+// LIVE GOOGLE REVIEWS (via secure Netlify function) — falls back to static cards on failure
+(function(){
+  var grid=document.getElementById('revGrid');
+  if(!grid) return;
+  var ratingEl=document.getElementById('gRating');
+  var countEl=document.getElementById('gCount');
+  var badge=document.getElementById('gReviewBadge');
+
+  function esc(t){ var d=document.createElement('div'); d.textContent=t==null?'':t; return d.innerHTML; }
+  function stars(n){ n=Math.round(n||5); var s=''; for(var i=0;i<5;i++){ s+= i<n ? '\u2605':'\u2606'; } return s; }
+  function initials(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
+
+  function card(r, hidden){
+    var cls = hidden ? 'rev rev-hidden' : 'rev';
+    var avatar = r.photo
+      ? '<div class="av av-img" style="background-image:url(\''+esc(r.photo)+'\')"></div>'
+      : '<div class="av">'+esc(initials(r.author))+'</div>';
+    var when = r.relativeTime ? '<small>'+esc(r.relativeTime)+'</small>' : '<small>Google review</small>';
+    return '<div class="'+cls+'">'
+      + '<div class="stars">'+stars(r.rating)+'</div>'
+      + '<p>"'+esc(r.text)+'"</p>'
+      + '<div class="who">'+avatar+'<div><b>'+esc(r.author)+'</b>'+when+'</div></div>'
+      + '</div>';
+  }
+
+  fetch('/.netlify/functions/reviews')
+    .then(function(res){ if(!res.ok) throw new Error('bad status'); return res.json(); })
+    .then(function(data){
+      if(!data || !data.reviews || !data.reviews.length){ return; } // keep fallback
+      // Update badge
+      if(ratingEl && data.rating){ ratingEl.textContent = Number(data.rating).toFixed(1); }
+      if(countEl && data.total){ countEl.textContent = Number(data.total).toLocaleString() + ' reviews'; }
+      if(badge && data.mapsUri){ badge.setAttribute('href', data.mapsUri); }
+      // Render real reviews (first 4 shown, rest hidden behind Show more)
+      var html = data.reviews.map(function(r,idx){ return card(r, idx>=4); }).join('');
+      grid.innerHTML = html;
+      grid.setAttribute('data-state','live');
+      // reset show-more button state
+      var btn=document.getElementById('revMoreBtn');
+      if(btn){
+        var hasHidden = data.reviews.length>4;
+        btn.style.display = hasHidden ? '' : 'none';
+        btn.textContent='Show more reviews';
+        btn.setAttribute('aria-expanded','false');
+        grid.classList.remove('show-all');
+      }
+    })
+    .catch(function(){ /* network/function error -> keep the static fallback cards */ });
+})();
+// SHOW MORE / LESS TEXT REVIEWS
+(function(){
+  var btn=document.getElementById('revMoreBtn');
+  var grid=document.querySelector('.rev-grid');
+  if(!btn||!grid) return;
+  btn.addEventListener('click', function(){
+    var open=grid.classList.toggle('show-all');
+    btn.textContent=open?'Show less':'Show more reviews';
+    btn.setAttribute('aria-expanded', open?'true':'false');
+    if(!open){ grid.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+})();
+(function(){
+  var menu = document.getElementById('pagemenu');
+  var links = menu.querySelectorAll('a[data-tab]');
+  var sections = document.querySelectorAll('.tab-section');
+  function showTab(tab){
+    sections.forEach(function(s){
+      s.classList.toggle('active', s.getAttribute('data-tab') === tab);
+    });
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('data-tab') === tab);
+    });
+  }
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      showTab(a.getAttribute('data-tab'));
+      menu.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  // Any other in-page link (e.g. Book Now -> #contact) also switches tab
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    if(!id){ return; }
+    var target = document.querySelector('.tab-section[data-tab="'+id+'"], #'+id+'.tab-section');
+    if(target && !a.hasAttribute('data-tab')){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        showTab(target.getAttribute('data-tab'));
+        menu.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
+  });
+  showTab('why'); // default
+})();
+
+// NAV: transparent on hero, solid after scrolling past it
+(function(){
+  var header=document.querySelector('header');
+  if(!header) return;
+  function onScroll(){
+    if(window.scrollY > window.innerHeight - 90){ header.classList.add('scrolled'); }
+    else { header.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// CAREERS APPLICATION FORM
+(function(){
+  var form=document.getElementById('careerForm');
+  if(!form) return;
+  var fileInput=document.getElementById('resumeInput');
+  var fileName=document.getElementById('resumeName');
+  var wrap=document.getElementById('careerFormWrap');
+
+  fileInput.addEventListener('change', function(){
+    if(fileInput.files && fileInput.files.length){
+      var f=fileInput.files[0];
+      if(f.size > 5*1024*1024){ fileName.textContent='File too large (max 5MB)'; fileName.style.color='#ED1C24'; fileInput.value=''; return; }
+      fileName.textContent=f.name; fileName.style.color='var(--white)';
+    } else { fileName.textContent='No file chosen'; fileName.style.color=''; }
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=(form.cname.value||'').trim();
+    var phone=(form.cphone.value||'').trim();
+    var email=(form.cemail.value||'').trim();
+    var role=form.crole.value;
+    if(!name){ form.cname.focus(); return; }
+    if(!phone){ form.cphone.focus(); return; }
+    if(!email){ form.cemail.focus(); return; }
+    if(!role){ form.crole.focus(); return; }
+    wrap.innerHTML='<div class="career-success"><div class="tick">&#10003;</div>'+
+      '<h3>Application Received</h3>'+
+      '<p>Thanks '+name.split(' ')[0]+'! We\'ve got your application for the '+role+' role. Our team will review it and reach out to you soon.</p></div>';
+  });
+})();
+
+// ENQUIRY POPUP
+(function(){
+  var overlay=document.getElementById('enquiryModal');
+  if(!overlay) return;
+  var closeBtn=document.getElementById('enqClose');
+  var form=document.getElementById('enquiryForm');
+  var content=document.getElementById('enqContent');
+
+  function open(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+
+  // open shortly after page loads
+  setTimeout(open, 1500);
+
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name=(form.name.value||'').trim();
+    var phone=(form.phone.value||'').trim();
+    if(!name || !phone){ 
+      if(!name) form.name.focus(); else form.phone.focus();
+      return; 
+    }
+    content.innerHTML='<div class="success"><div class="tick">&#10003;</div>'+
+      '<h3>Thank You'+(name?', '+name.split(' ')[0]:'')+'!</h3>'+
+      '<p class="sub" style="margin:6px 0 0">We\'ve received your enquiry. Our team will call you on '+phone+' shortly.</p></div>';
+    setTimeout(close, 3200);
+  });
+})();
+</script>
+</body>
+</html>   radial-gradient(900px 600px at 50% 50%, rgba(60,60,72,.10), transparent 70%)}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--black);color:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-weight:800;letter-spacing:-.5px;line-height:1.05}
+.eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--red);font-weight:700}
+.section-pad{padding:90px 0}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:800;
+  padding:15px 30px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;font-size:14px;
+  transition:.2s;border:2px solid var(--red)}
+.btn:hover{background:var(--red-dark);border-color:var(--red-dark)}
+.btn.ghost{background:transparent;border:2px solid #3a3a40;color:var(--white)}
+.btn.ghost:hover{border-color:var(--red)}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(180deg,rgba(8,8,9,.55),rgba(8,8,9,0));border-bottom:0;transition:background .3s ease,border-color .3s ease,box-shadow .3s ease}
+header.scrolled{background:rgba(12,12,14,.82);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--glass-line);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:50px;width:auto}
+.brand .bn{font-weight:800;font-size:18px;letter-spacing:1px}
+.brand .bn span{color:var(--red)}
+.navlinks{display:flex;gap:30px;list-style:none}
+.navlinks a{color:var(--steel-light);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.3px;transition:.15s}
+.navlinks a:hover{color:var(--red)}
+.pagemenu{display:flex;justify-content:center;flex-wrap:wrap;gap:14px 30px;list-style:none;
+  padding:16px 26px;margin:26px auto 10px;border-radius:50px;
+  background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);box-shadow:var(--float);width:fit-content;max-width:100%}
+.pagemenu a{color:var(--steel-light);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.5px;
+  text-transform:uppercase;transition:.15s}
+.pagemenu a:hover{color:var(--red)}
+.pagemenu a.active{color:var(--red);border-bottom:2px solid var(--red);padding-bottom:4px}
+.tab-section{display:none}
+.tab-section.active{display:block}
+.navcta{display:flex;align-items:center;gap:18px}
+.phone{color:var(--white);text-decoration:none;font-weight:700;font-size:14px}
+.phone small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;font-weight:600}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#0c0c0e;padding-top:80px}
+/* full-screen gym scene background (cross-fades) */
+.hero-media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover}
+.hero-media .scene{position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0;animation:fade 18s infinite}
+.hero-media .scene:nth-child(1){animation-delay:0s}
+.hero-media .scene:nth-child(2){animation-delay:6s}
+.hero-media .scene:nth-child(3){animation-delay:12s}
+@keyframes fade{0%{opacity:0}6%{opacity:1}28%{opacity:1}36%{opacity:0}100%{opacity:0}}
+/* dark overlay keeps headline readable, like the reference site */
+.hero-overlay{position:absolute;inset:0;z-index:1;
+  background:
+   linear-gradient(90deg, rgba(8,8,9,.82) 0%, rgba(8,8,9,.66) 42%, rgba(8,8,9,.42) 72%, rgba(8,8,9,.6) 100%),
+   linear-gradient(180deg, rgba(8,8,9,.5) 0%, rgba(8,8,9,.34) 45%, rgba(8,8,9,.72) 100%),
+   radial-gradient(900px 500px at 78% 30%, rgba(237,28,36,.14), transparent 60%)}
+.hero-grid{position:absolute;inset:0;z-index:1;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:52px 52px;mask-image:linear-gradient(180deg,#000,transparent)}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+.hero h1{font-size:62px;text-transform:uppercase;color:var(--white);text-shadow:0 2px 4px rgba(0,0,0,.7),0 4px 30px rgba(0,0,0,.6)}
+.hero h1 em{font-style:normal;color:var(--red);display:block}
+.hero p.lead{color:#d6d8dd;font-size:18px;margin:22px 0 30px;max-width:480px;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.hero .tagband{display:inline-flex;gap:14px;align-items:center;margin-bottom:22px;font-weight:800;letter-spacing:3px;font-size:13px}
+.hero .tagband span{color:var(--steel-light)}
+.hero .tagband b{color:var(--red)}
+.herobtns{display:flex;gap:14px;flex-wrap:wrap}
+.herologo{display:flex;justify-content:center}
+.herologo img{width:330px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.7))}
+@media(prefers-reduced-motion:reduce){.hero-media .scene{animation:none;opacity:1}.hero-media .scene:nth-child(2),.hero-media .scene:nth-child(3){opacity:0}}
+
+/* OFFER STRIP */
+.offer{background:var(--red);color:#fff}
+.offer .wrap{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;gap:20px;flex-wrap:wrap}
+.offer h3{font-size:22px;text-transform:uppercase}
+.offer h3 b{font-size:30px}
+.offer p{font-size:13px;opacity:.92;letter-spacing:1px;font-weight:600}
+.offer .btn{background:#0A0A0B;border-color:#0A0A0B}
+.offer .btn:hover{background:#000}
+
+/* WHY CARDS */
+.why{background:transparent}
+.sec-head{text-align:center;margin-bottom:54px}
+.sec-head h2{font-size:40px;text-transform:uppercase;margin-top:10px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:18px;padding:0;transition:.25s;position:relative;overflow:hidden;box-shadow:var(--float)}
+.card .card-img{height:170px;background-size:cover;background-position:center;position:relative}
+.card .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(18,18,20,.85))}
+.card .card-body{padding:26px 28px 30px}
+.card:before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left;transition:.25s}
+.card:hover{border-color:var(--glass-line-hi);transform:translateY(-6px);box-shadow:var(--float-hi)}
+.card:hover:before{transform:scaleX(1)}
+.card .ic{width:48px;height:48px;border:2px solid var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:-44px 0 16px;position:relative;z-index:2;background:var(--panel);box-shadow:var(--float)}
+.card h3{font-size:19px;text-transform:uppercase;margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px}
+
 /* SERVICES */
 .services{background:transparent}
 /* SERVICES — hover to pop, others fade back */
