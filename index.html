@@ -246,10 +246,18 @@ nav{display:flex;align-items:center;justify-content:space-between;height:78px}
 .rev p{color:var(--steel-light);font-size:14px;font-style:italic}
 .rev .who{display:flex;align-items:center;gap:12px;margin-top:18px}
 .rev .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.rev .av.av-img{background-size:cover;background-position:center;background-repeat:no-repeat}
 .rev .who b{font-size:14px}.rev .who small{display:block;color:var(--muted);font-size:12px}
 .gbadge{display:inline-flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:16px;padding:16px 26px;margin-top:14px;box-shadow:var(--float)}
 .gbadge .big{font-size:34px;font-weight:800}
 .gbadge .g{color:#4285F4;font-weight:800}.gbadge .g span:nth-child(2){color:#EA4335}.gbadge .g span:nth-child(3){color:#FBBC05}.gbadge .g span:nth-child(4){color:#4285F4}.gbadge .g span:nth-child(5){color:#34A853}
+.gbadge{text-decoration:none;color:inherit;transition:.2s}
+.gbadge:hover{transform:translateY(-2px);box-shadow:var(--float-hi);border-color:var(--glass-line-hi)}
+.gbadge .gcount{font-size:11px;letter-spacing:1px;color:var(--muted);margin-top:3px;text-transform:uppercase}
+.rev-hidden{display:none}
+.rev-grid.show-all .rev-hidden{display:block}
+.rev-more{text-align:center;margin-top:28px}
+.rev-more .btn{cursor:pointer}
 
 /* TRAINERS */
 .trainers{background:transparent}
@@ -605,13 +613,19 @@ footer{background:#070708;border-top:1px solid var(--line);padding:46px 0 30px}
 <section class="reviews section-pad" id="reviews">
  <div class="wrap">
   <div class="sec-head"><div class="eyebrow">Testimonials</div><h2>What Members Say</h2>
-   <div class="gbadge"><div class="big">4.9</div><div><div class="g"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span> Reviews</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div></div>
+   <a class="gbadge" id="gReviewBadge" href="https://www.google.com/maps/place/?q=place_id:ChIJMWiFnqSVyzsRJ7_HDBfPn4g" target="_blank" rel="noopener" aria-label="Read our Google reviews"><div class="big" id="gRating">4.9</div><div><div class="g"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span> Reviews</div><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="gcount" id="gCount">685 reviews</div></div></a>
   </div>
-  <div class="rev-grid">
-   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Lost 15kg in four months. The trainers actually care and the diet plan changed everything for me."</p><div class="who"><div class="av">R</div><div><b>Rahul M.</b><small>Weight Loss Program</small></div></div></div>
-   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Best gym in the city for transformation. Certified trainers, great energy, and real accountability."</p><div class="who"><div class="av">S</div><div><b>Sneha K.</b><small>Personal Training</small></div></div></div>
-   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"The boxing and HIIT classes are unreal. Came for fitness, stayed for the community."</p><div class="who"><div class="av">A</div><div><b>Arjun V.</b><small>Boxing &amp; MMA</small></div></div></div>
+  <div class="rev-grid" id="revGrid" data-state="fallback">
+<div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Joined recently and the experience has been great. Motivating atmosphere, well-maintained equipment, clean space. My trainer Shyam is supportive and really knows his stuff on form and goals."</p><div class="who"><div class="av">S</div><div><b>Shyam's client</b><small>Personal Training · Shyam</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Impressed by the professionalism. Trainers give excellent guidance on form and technique, and the equipment is well kept. Special shout-out to my trainer Sandeep for the attention to detail."</p><div class="who"><div class="av">S</div><div><b>Member</b><small>Strength Training · Sandeep</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Starting a new gym felt intimidating, but the staff made me feel at home. As a beginner nervous about weights, Shyam was patient and tailored everything to my level. I'm stronger and more confident now."</p><div class="who"><div class="av">K</div><div><b>Beginner member</b><small>Beginner Friendly · Shyam</small></div></div></div>
+   <div class="rev"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"A month in on PT with Sameer and I've learned proper form and how to stay consistent. From stretches to workout patterns, he's been an excellent guide. Great machines and environment too."</p><div class="who"><div class="av">S</div><div><b>Sameer's client</b><small>Personal Training · Sameer</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Been training here a while and it's been great. My trainer Dutta won't chase reps until your form is right, and adapts the plan when needed. Well-equipped, well-maintained, and polite staff."</p><div class="who"><div class="av">D</div><div><b>Member</b><small>Personal Training · Dutta</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"One stop for a healthy transformation. Excellent gym with excellent, well-experienced trainers and the best equipment. Easily one of the best in Manikonda."</p><div class="who"><div class="av">R</div><div><b>Member</b><small>Transformation</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"High hygiene standards, sanitised equipment, and a friendly, accommodating team. Loads of space and an exhaustive equipment list. Would strongly recommend to anyone looking for a great gym."</p><div class="who"><div class="av">A</div><div><b>Member</b><small>Hygiene & Safety</small></div></div></div>
+   <div class="rev rev-hidden"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"This is the place to stop, drop and transform — the only question is how committed you are. Friendly, polite staff and professional, properly skilled trainers."</p><div class="who"><div class="av">S</div><div><b>Member</b><small>Stop. Drop. Transform.</small></div></div></div>
   </div>
+  <div class="rev-more"><button type="button" id="revMoreBtn" class="btn ghost" aria-expanded="false">Show more reviews</button></div>
 
   <div class="vidrev-head"><div class="eyebrow">Watch Their Stories</div><h3>Video Reviews</h3></div>
   <div class="vidrev-grid">
@@ -721,6 +735,67 @@ footer{background:#070708;border-top:1px solid var(--line);padding:46px 0 30px}
   } else {
     tiles.forEach(function(t){ t._tryPlay(); });
   }
+})();
+// LIVE GOOGLE REVIEWS (via secure Netlify function) — falls back to static cards on failure
+(function(){
+  var grid=document.getElementById('revGrid');
+  if(!grid) return;
+  var ratingEl=document.getElementById('gRating');
+  var countEl=document.getElementById('gCount');
+  var badge=document.getElementById('gReviewBadge');
+
+  function esc(t){ var d=document.createElement('div'); d.textContent=t==null?'':t; return d.innerHTML; }
+  function stars(n){ n=Math.round(n||5); var s=''; for(var i=0;i<5;i++){ s+= i<n ? '\u2605':'\u2606'; } return s; }
+  function initials(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
+
+  function card(r, hidden){
+    var cls = hidden ? 'rev rev-hidden' : 'rev';
+    var avatar = r.photo
+      ? '<div class="av av-img" style="background-image:url(\''+esc(r.photo)+'\')"></div>'
+      : '<div class="av">'+esc(initials(r.author))+'</div>';
+    var when = r.relativeTime ? '<small>'+esc(r.relativeTime)+'</small>' : '<small>Google review</small>';
+    return '<div class="'+cls+'">'
+      + '<div class="stars">'+stars(r.rating)+'</div>'
+      + '<p>"'+esc(r.text)+'"</p>'
+      + '<div class="who">'+avatar+'<div><b>'+esc(r.author)+'</b>'+when+'</div></div>'
+      + '</div>';
+  }
+
+  fetch('/.netlify/functions/reviews')
+    .then(function(res){ if(!res.ok) throw new Error('bad status'); return res.json(); })
+    .then(function(data){
+      if(!data || !data.reviews || !data.reviews.length){ return; } // keep fallback
+      // Update badge
+      if(ratingEl && data.rating){ ratingEl.textContent = Number(data.rating).toFixed(1); }
+      if(countEl && data.total){ countEl.textContent = Number(data.total).toLocaleString() + ' reviews'; }
+      if(badge && data.mapsUri){ badge.setAttribute('href', data.mapsUri); }
+      // Render real reviews (first 4 shown, rest hidden behind Show more)
+      var html = data.reviews.map(function(r,idx){ return card(r, idx>=4); }).join('');
+      grid.innerHTML = html;
+      grid.setAttribute('data-state','live');
+      // reset show-more button state
+      var btn=document.getElementById('revMoreBtn');
+      if(btn){
+        var hasHidden = data.reviews.length>4;
+        btn.style.display = hasHidden ? '' : 'none';
+        btn.textContent='Show more reviews';
+        btn.setAttribute('aria-expanded','false');
+        grid.classList.remove('show-all');
+      }
+    })
+    .catch(function(){ /* network/function error -> keep the static fallback cards */ });
+})();
+// SHOW MORE / LESS TEXT REVIEWS
+(function(){
+  var btn=document.getElementById('revMoreBtn');
+  var grid=document.querySelector('.rev-grid');
+  if(!btn||!grid) return;
+  btn.addEventListener('click', function(){
+    var open=grid.classList.toggle('show-all');
+    btn.textContent=open?'Show less':'Show more reviews';
+    btn.setAttribute('aria-expanded', open?'true':'false');
+    if(!open){ grid.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
 })();
 // SHOW MORE / LESS VIDEO REVIEWS
 (function(){
